@@ -2,8 +2,10 @@ const chatForm = document.getElementById("chat-form");
 
 const socket = io();
 
+//Message from server
 socket.on("message", (message) => {
   console.log(message);
+  outputMessage(message);
 });
 
 // Message submit
@@ -16,6 +18,13 @@ chatForm.addEventListener("submit", (e) => {
   //Emit message to server
   socket.emit("chatMessage", msg);
 });
+
+//Output message to DOM
+function outputMessage(message) {
+  const div = document.createElement("div");
+  div.classList.add("message");
+  div.innerHTML = ``; // reprendre la video à 23:40 https://www.youtube.com/watch?v=jD7FnbI76Hg
+}
 
 // const chatForm = document.getElementById("chat-form");
 // const chatMessages = document.querySelector(".chat-messages");
