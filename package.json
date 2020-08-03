@@ -1,0 +1,19 @@
+{
+  "name": "realtime_chat",
+  "version": "1.0.0",
+  "description": "Realtime chat app with users and rooms",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tambass/realtime_chat.git"
+  },
+  "author": "Fabien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tambass/realtime_chat/issues"
+  },
+  "homepage": "https://github.com/Tambass/realtime_chat#readme"
+}
