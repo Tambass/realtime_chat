@@ -15,23 +15,27 @@ const botName = "ChatCore Bot";
 
 //Run when client connects
 io.on("connection", (socket) => {
-  //Welcome current user
-  socket.emit("message", formatMessage(botName, "Welcome to LiveChat!"));
+  socket.on("joinRoom", ({ username, room }) => {
+    
 
-  // Broadcast when a user connect
-  socket.broadcast.emit(
-    "message",
-    formatMessage(botName, "A user has joined the chat")
-  );
+    //Welcome current user
+    socket.emit("message", formatMessage(botName, "Welcome to LiveChat!"));
 
-  // Runs when client disconnect
-  socket.on("disconnect", () => {
-    io.emit("message", formatMessage(botName, "A user has left the chat"));
+    // Broadcast when a user connect
+    socket.broadcast.emit(
+      "message",
+      formatMessage(botName, "A user has joined the chat")
+    );
   });
 
   //Listen for chatMessage
   socket.on("chatMessage", (msg) => {
     io.emit("message", formatMessage("USER", msg));
+  });
+
+  // Runs when client disconnect
+  socket.on("disconnect", () => {
+    io.emit("message", formatMessage(botName, "A user has left the chat"));
   });
 });
 
