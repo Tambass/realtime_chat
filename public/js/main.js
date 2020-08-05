@@ -11,6 +11,12 @@ const socket = io();
 //Join chatroom
 socket.emit("joinRoom", { username, room });
 
+//Get room and users
+socket.on('roomUsers', ({room, users}) => {
+  outputRoomName(room)
+  outputUsers(users)
+})
+
 //Message from server
 socket.on("message", (message) => {
   console.log(message);
@@ -45,6 +51,8 @@ function outputMessage(message) {
   </p>`;
   document.querySelector(".chat-messages").appendChild(div);
 }
+
+//
 
 // const chatForm = document.getElementById("chat-form");
 // const chatMessages = document.querySelector(".chat-messages");
