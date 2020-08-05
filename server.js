@@ -17,7 +17,7 @@ const io = socketio(server);
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-const botName = "ChatCore Bot";
+const botName = "LiveChat Bot";
 
 //Run when client connects
 io.on("connection", (socket) => {
@@ -27,14 +27,17 @@ io.on("connection", (socket) => {
     socket.join(user.room);
 
     //Welcome current user
-    socket.emit("message", formatMessage(botName, "Welcome to LiveChat!"));
+    socket.emit(
+      "message",
+      formatMessage(botName, "Bienvenue dans le LiveChat!")
+    );
 
     // Broadcast when a user connect
     socket.broadcast
       .to(user.room)
       .emit(
         "message",
-        formatMessage(botName, `${user.username} has joined the chat`)
+        formatMessage(botName, `${user.username} a rejoint la salle`)
       );
 
     //Send users and room info
@@ -58,7 +61,7 @@ io.on("connection", (socket) => {
     if (user) {
       io.to(user.room).emit(
         "message",
-        formatMessage(botName, `${user.username} has left the chat`)
+        formatMessage(botName, `${user.username} a quitté la salle`)
       );
 
       //Send users and room info
